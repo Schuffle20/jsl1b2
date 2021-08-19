@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exchange Rate</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+    <img src="./img/money.png" class="mondy-img" alt="money"/>
+    <h1>Exchange Rate Calculator</h1>
+    <p>Choose the currency and amount to get exchange rate</p>
+
+    <div class="container">
+        <div class="currency">
+            <select id="currency-one">
+                <option value="AED">AED</option>
+                <option value="ARS">ARS</option>
+                <option value="AUD">AUD</option>
+                <option value="BGN">BGN</option>
+                <option value="EUR">EUR</option>
+                <option value="USD" selected>USD</option>
+                <option value="MMK">MMK</option>
+                <option value="THB">THB</option>
+            </select>
+
+            <input type="number" name="amount-one" id="amount-one" class="" placeholder="0" value="1">
+        </div>
+
+        <div class="swap-rate-container">
+            <button id="swap" class="btn">Swap</button>
+            <div id="rate" class="rate">1USD = 1650MMK</div>
+        </div>
+
+        <div class="currency">
+            <select id="currency-two">
+                <option value="AED">AED</option>
+                <option value="ARS">ARS</option>
+                <option value="AUD">AUD</option>
+                <option value="BGN">BGN</option>
+                <option value="EUR" selected>EUR</option>
+                <option value="USD">USD</option>
+                <option value="MMK">MMK</option>
+                <option value="THB">THB</option>
+            </select>
+
+            <input type="number" name="amount-two" id="amount-two" class="" placeholder="0" value="1">
+        </div>
+
+    </div>
+
+
+
+    <script type="text/javascript" src="js/app.js"></script>
+    
+</body>
+</html>

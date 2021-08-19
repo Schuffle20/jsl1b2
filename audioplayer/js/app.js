@@ -65,29 +65,124 @@ function pausesong(){
     audio.pause();
 }
 
-nextbtn.addEventListener('click',()=>{
-   songindex++;
-   console.log(songindex);
-   update();
-   playsong();
+// nextbtn.addEventListener('click',()=>{
+//    songindex++;
+//    // console.log(songindex);
+//    update();
+//    playsong();
+//
+// });
+//
+// prevbtn.addEventListener('click',()=>{
+//     songindex--;
+//     update();
+//     playsong();
+//
+// });
+//
+// function update(){
+//     songs.forEach((song)=>{
+//         if(songindex > songs.length - 1){
+//             songindex = 0
+//         }else if(songindex < 0){
+//             songindex = songs.length - 1;
+//         }
+//         loadsong(songs[songindex]);
+//     })
+// }
 
-});
+prevbtn.addEventListener('click',previoussong);
+nextbtn.addEventListener('click',nextsong);
 
-prevbtn.addEventListener('click',()=>{
+//Previous Song
+function previoussong(){
     songindex--;
-    update();
+    // console.log('songindex');
+
+    if(songindex < 0){
+        songindex = songs.length-1;
+    }
+
+    loadsong(songs[songindex]);
     playsong();
-
-});
-
-function update(){
-    songs.forEach((song)=>{
-        if(songindex > songs.length - 1){
-            songindex = 0
-        }else if(songindex < 0){
-            songindex = songs.length - 1;
-        }
-        loadsong(songs[songindex]);
-    })
 }
+
+function nextsong(){
+    // console.log('hay');
+
+    songindex++;
+
+    if(songindex > songs.length-1){
+        songindex = 0;
+    }
+    loadsong(songs[songindex]);
+    playsong();
+}
+
+//Update Progress Bar
+
+function updateprogress(e){
+    // console.log(audio.currentTime);
+    console.log(audio.duration);
+
+    // // Method1
+    // const progresspercent = (audio.currentTime/audio.duration) * 100;
+    // // console.log(progresspercent);
+    // progress.style.width = `${progresspercent}%`;
+
+   // Event Call
+   // console.log(this);
+   // console.log(e.target);
+   // console.log(e.srcElement);
+
+   // Method2
+   //  const currentTime = e.target.currentTime;
+   //  const duration = e.target.duration;
+   //  const progresspercent = (currentTime/duration) * 100;
+   //
+   //  progress.style.width = `${progresspercent}%`;
+
+    // Method3
+    // const {currentTime} = e.target;
+    // const {Duration} = e.target;
+    // const progresspercent = (currentTime/duration) * 100;
+    //
+    // progress.style.width = `${progresspercent}%`;
+
+    // Method 4
+    const {currentTime, duration} = e.target;
+    const progresspercent = (currentTime/duration) * 100;
+
+    progress.style.width = `${progresspercent}%`;
+
+
+
+}
+
+function setprogress(e){
+    // console.log(e.target);
+
+    const width = e.target.clientWidth;
+    // console.log(width);
+
+    const clickx = e.offsetX;
+    // console.log(clickx);
+
+    const duration = audio.duration;
+    // console.log(duration);
+
+    audio.currentTime = (clickx / width) * duration;
+}
+
+//Time Play and Stop Update
+audio.addEventListener('timeupdate', updateprogress);
+
+//Click On Progress bar
+progresscontainer.addEventListener('click', setprogress);
+
+//SOng End
+audio.addEventListener('ended', nextsong);
+
+
+
 
